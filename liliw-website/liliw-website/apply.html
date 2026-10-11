@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Apply | Liliw: Love, Made Local</title>
+  <meta name="description" content="Apply to have your Liliw business featured on Love, Made Local.">
+  <link rel="icon" href="assets/images/logo.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/images/apply/hero-apply.jpg" as="image" fetchpriority="high">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ===================== NAVIGATION ===================== -->
+  <header class="site-header">
+    <nav class="nav" aria-label="Main">
+      <a class="nav__logo" href="index.html"><img src="assets/images/logo.svg" alt="Liliw home"></a>
+
+      <button class="nav__burger" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+
+      <ul class="nav__menu">
+        <li><a class="nav__link" href="index.html">HOME</a></li>
+        <li class="nav__dropdown">
+          <button class="nav__dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+            MSMEs
+            <svg class="nav__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg>
+          </button>
+          <ul class="nav__dropdown-menu">
+            <li><a href="food.html">Food</a></li>
+            <li><a href="hospitality.html">Hospitality</a></li>
+            <li><a href="handicrafts.html">Handicrafts</a></li>
+          </ul>
+        </li>
+        <li><a class="nav__link is-active" href="apply.html" aria-current="page">APPLY</a></li>
+        <li><a class="nav__link" href="about.html">ABOUT</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===================== HERO ===================== -->
+    <!-- The tiny blurry image (the long code) shows instantly; the real photo replaces it a moment later -->
+    <section class="page-hero page-hero--apply" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA0JCgsKCA0LCgsODg0PEyAVExISEyccHhcgLikxMC4pLSwzOko+MzZGNywtQFdBRkxOUlNSMj5aYVpQYEpRUk//2wBDAQ4ODhMREyYVFSZPNS01T09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0//wAARCAARACgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDsBrK+orP1LxPYQIfMcSSgHasf3sjtntXnMmv3MkLRnA3DBI4qkLkgngVbQkejaN4mF6ZI5tsU2SVGB8y+mfUVU1PxOLTVmjeWR41j+ZVAO0+v5Yrh0vCjBgSCOQR6017otIzsdxYkkk9c1PKVzWZ6KmpmWBJE8zY65BwM4orjbPVilqkZONvHWiq5A9ozn6BRRVmYppKKKAHp0NFFFAH/2Q==);">
+      <img class="page-hero__bg" src="assets/images/apply/hero-apply.jpg" alt="" fetchpriority="high" decoding="sync">
+      <h1 class="page-hero__title">FEATURE YOUR BUSINESS</h1>
+      <p class="page-hero__subtitle">Submit your business details to be featured on our platform and reach more people inside and outside Liliw.</p>
+    </section>
+
+    <!-- ===================== STEPPER ===================== -->
+    <div class="stepper-bar">
+      <ol class="stepper" aria-label="Application steps">
+        <li class="is-current"><button type="button" data-goto="1"><span class="stepper__dot">1</span><span class="stepper__label">Business</span></button></li>
+        <li><button type="button" data-goto="2"><span class="stepper__dot">2</span><span class="stepper__label">About</span></button></li>
+        <li><button type="button" data-goto="3"><span class="stepper__dot">3</span><span class="stepper__label">Details &amp; Verification</span></button></li>
+        <li><button type="button" data-goto="4"><span class="stepper__dot">4</span><span class="stepper__label">Consent</span></button></li>
+      </ol>
+    </div>
+
+    <!-- ===================== FORM (one step shows at a time) ===================== -->
+    <form class="apply" id="apply-form" novalidate>
+      <input type="hidden" name="formType" value="application">
+
+      <!-- STEP 1 -->
+      <section class="apply-step" data-step="1">
+        <div class="step-head">
+          <span class="step-head__num">1</span>
+          <div><h2>Business Information</h2><p>Tell us the basic details about your business and where to find you.</p></div>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label for="a-name">Business Name *</label>
+            <input id="a-name" name="businessName" type="text" placeholder="Enter the registered business name" required>
+          </div>
+          <div class="field">
+            <label for="a-address">Business Address *</label>
+            <input id="a-address" name="businessAddress" type="text" placeholder="Enter the business’ complete location in Liliw, Laguna" required>
+          </div>
+          <fieldset class="field" data-required-group="category">
+            <legend>Business Category *</legend>
+            <label class="choice"><input type="radio" name="category" value="Restaurant / Food Business"><span class="choice__dot"></span>Restaurant / Food Business</label>
+            <label class="choice"><input type="radio" name="category" value="Hospitality"><span class="choice__dot"></span>Hospitality</label>
+            <label class="choice"><input type="radio" name="category" value="Handicrafts"><span class="choice__dot"></span>Handicrafts</label>
+            <label class="choice"><input type="radio" name="category" value="Other"><span class="choice__dot"></span>Other:</label>
+            <input class="other-input" name="categoryOther" type="text" aria-label="Other category">
+          </fieldset>
+          <div class="field">
+            <label for="a-year">Year Established</label>
+            <input id="a-year" name="yearEstablished" type="text" inputmode="numeric" maxlength="4" placeholder="e.g. 2025" data-year>
+          </div>
+        </div>
+        <div class="step-actions">
+          <button class="btn-next" type="button" data-next>Next</button>
+        </div>
+      </section>
+
+      <!-- STEP 2 -->
+      <section class="apply-step" data-step="2" hidden>
+        <div class="step-head">
+          <span class="step-head__num">2</span>
+          <div><h2>About the Business</h2><p>Share your story, what makes your business special, and what sets you apart.</p></div>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label for="a-desc">Business Description *</label>
+            <textarea id="a-desc" name="description" placeholder="Tell us briefly about the business, products, or services." required></textarea>
+          </div>
+          <div class="field">
+            <label for="a-unique">What makes your business unique?</label>
+            <textarea id="a-unique" name="unique" placeholder="Share what makes the business special or different."></textarea>
+          </div>
+          <div class="field field--full">
+            <label for="a-story">Business Background/Story</label>
+            <textarea id="a-story" class="is-short" name="story" placeholder="Tell us how the business started."></textarea>
+          </div>
+        </div>
+        <div class="step-actions">
+          <button class="btn-back" type="button" data-back>Back</button>
+          <button class="btn-next" type="button" data-next>Next</button>
+        </div>
+      </section>
+
+      <!-- STEP 3 -->
+      <section class="apply-step" data-step="3" hidden>
+        <div class="step-head">
+          <span class="step-head__num">3</span>
+          <div><h2>Details and Verification</h2><p>Provide your contact details, online links, and other information to help us verify your business.</p></div>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label for="a-phone">Business Contact Number *</label>
+            <input id="a-phone" name="contactNumber" type="tel" placeholder="Enter an active contact number" required data-phone>
+          </div>
+          <div class="field">
+            <label for="a-hours">Operating Hours*</label>
+            <input id="a-hours" name="operatingHours" type="text" placeholder="e.g. Monday - Saturday, 9:00 AM - 7:00 PM" required>
+          </div>
+          <div class="field">
+            <label for="a-email">Email Address*</label>
+            <input id="a-email" name="email" type="email" placeholder="Enter an active email address" required>
+          </div>
+          <div class="field">
+            <label for="a-products">Products / Services Offered *</label>
+            <input id="a-products" name="products" type="text" placeholder="List the business’ main products and/or services." required>
+          </div>
+          <div class="field">
+            <label for="a-social">Social Media / Website Link *</label>
+            <textarea id="a-social" class="is-tiny" name="socialLinks" rows="2" placeholder="Link/s of social media pages/websites (e.g. Facebook and IG)" required></textarea>
+          </div>
+          <div class="field">
+            <label for="a-price">Price Range *</label>
+            <input id="a-price" name="priceRange" type="text" placeholder="e.g. PHP 100 - PHP 500" required>
+          </div>
+          <div class="field">
+            <label for="a-owner">Business Owner / Representative Name *</label>
+            <input id="a-owner" name="ownerName" type="text" placeholder="Enter Full Name" autocomplete="name" required>
+          </div>
+          <div class="field" style="grid-row: span 2;">
+            <label for="a-proof">Proof of Registration *</label>
+            <label class="upload" id="upload-box">
+              <input id="a-proof" name="proof" type="file" accept=".jpg,.jpeg,.png,.pdf,.docx" required>
+              <svg viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5M4 15v5h16v-5"/></svg>
+              <strong>Upload Document</strong>
+              <span>(JPG, PNG, DOCX, PDF - Up to 10MB)</span>
+              <em class="upload__file" id="upload-file"></em>
+            </label>
+          </div>
+          <div class="field">
+            <label for="a-role">Position / Role *</label>
+            <input id="a-role" name="role" type="text" placeholder="e.g. Business Owner, Manager, Authorized Representative" required>
+          </div>
+        </div>
+        <div class="step-actions">
+          <button class="btn-back" type="button" data-back>Back</button>
+          <button class="btn-next" type="button" data-next>Next</button>
+        </div>
+      </section>
+
+      <!-- STEP 4 -->
+      <section class="apply-step" data-step="4" hidden>
+        <div class="step-head">
+          <span class="step-head__num">4</span>
+          <div><h2>Consent</h2><p>Review and agree to the terms regarding your information, privacy, and business feature submission.</p></div>
+        </div>
+        <fieldset class="field consent" data-required-group="consent">
+          <legend class="visually-hidden">Consent</legend>
+          <label class="choice"><input type="checkbox" name="consent1" value="Yes" required><span class="choice__dot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>I consent to the collection, use, storage, and processing of my information for reviewing and processing my application.</label>
+          <label class="choice"><input type="checkbox" name="consent2" value="Yes" required><span class="choice__dot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>I confirm that the information and materials I submit are accurate and that I have the right or permission to use and authorize their publication.</label>
+          <label class="choice"><input type="checkbox" name="consent3" value="Yes" required><span class="choice__dot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>I have read and understood the information provided and agree to the terms for submitting and potentially featuring my business.</label>
+        </fieldset>
+        <div class="step-actions">
+          <button class="btn-back" type="button" data-back>Back</button>
+          <button class="btn-next" type="submit" id="apply-submit">Submit</button>
+        </div>
+      </section>
+      <p class="form-note" id="apply-note" role="status" aria-live="polite"></p>
+    </form>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="footer__brand">
+      <img class="footer__logo" src="assets/images/logo.svg" alt="Liliw">
+      <p class="footer__tagline">Love, Made Local</p>
+      <div class="footer__social">
+        <!-- Liliw Tourism official pages -->
+        <a href="https://www.facebook.com/share/1HSTS8QGon/" target="_blank" rel="noopener" aria-label="Liliw Tourism on Facebook">
+          <svg viewBox="0 0 24 24" fill="#fff"><path d="M24 12a12 12 0 1 0-13.88 11.85v-8.38H7.08V12h3.04V9.36c0-3 1.79-4.67 4.53-4.67 1.31 0 2.68.24 2.68.24v2.95h-1.51c-1.49 0-1.95.93-1.95 1.87V12h3.32l-.53 3.47h-2.79v8.38A12 12 0 0 0 24 12z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/liliw.turismo" target="_blank" rel="noopener" aria-label="Liliw Tourism on Instagram">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#fff"/><rect x="6.2" y="6.2" width="11.6" height="11.6" rx="3.4" fill="none" stroke="#0F172B" stroke-width="1.7"/><circle cx="12" cy="12" r="2.8" fill="none" stroke="#0F172B" stroke-width="1.7"/><circle cx="15.4" cy="8.6" r=".9" fill="#0F172B"/></svg>
+        </a>
+      </div>
+      <p class="footer__copy">© 2026 Liliw: Love, Made Local. All rights reserved.</p>
+    </div>
+
+    <div class="footer__hotlines">
+      <h2>EMERGENCY HOTLINES</h2>
+      <ul class="hotline-list">
+        <li class="hotline">
+          <img src="assets/images/icons/hotline-mdrrmo.svg" alt="">
+          <span class="hotline__label">MDRRM Office</span>
+          <span class="hotline__numbers">
+            <a href="tel:09451350537">0945 135 0537</a>
+            <a href="tel:09489381301">0948 938 1301</a>
+            <a href="tel:0495033621">(049) 5033-621</a>
+          </span>
+        </li>
+        <li class="hotline hotline--pnp">
+          <img src="assets/images/icons/hotline-pnp.svg" alt="">
+          <span class="hotline__label">PNP</span>
+          <span class="hotline__numbers">
+            <a href="tel:09063604119">0906 360 4119</a>
+            <a href="tel:09985985647">0998 598 5647</a>
+            <a href="tel:0495631114">(049) 5631-114</a>
+          </span>
+        </li>
+        <li class="hotline hotline--bfp">
+          <img src="assets/images/icons/hotline-bfp.svg" alt="">
+          <span class="hotline__label">BFP Station</span>
+          <span class="hotline__numbers">
+            <a href="tel:09567690379">0956 769 0379</a>
+            <a href="tel:09617228127">0961 722 8127</a>
+            <a href="tel:0495031756">(049) 5031-756</a>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/forms.js"></script>
+</body>
+</html>
