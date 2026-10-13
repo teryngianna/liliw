@@ -9,7 +9,7 @@
    they check the fields and show the success screen,
    but nothing is saved anywhere.
    --------------------------------------------------------- */
-const SHEET_URL = "";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycby5vKxTJihxEKuO6fvNEGd3W9ExbPK5yHxjM7u-r6jgCDcMzj7Bfol2Ro9phKlAGCow0w/exec";
 
 const MAX_FILE_MB = 10;
 const ALLOWED_FILES = ["jpg", "jpeg", "png", "pdf", "docx"];
