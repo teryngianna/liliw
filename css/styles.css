@@ -114,9 +114,7 @@ button { font: inherit; cursor: pointer; }
   transition: color .2s;
 }
 .nav__link:hover, .nav__dropdown-toggle:hover { color: var(--green); }
-.nav__link.is-active, .nav__dropdown-toggle.is-active {
-  color: var(--green); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 2px;
-}
+.nav__link.is-active, .nav__dropdown-toggle.is-active { color: var(--green); }
 .nav__chevron { width: 18px; height: 18px; transition: transform .2s; }
 
 /* Dropdown: sits flush under the green stripe, centered under "MSMEs" */
