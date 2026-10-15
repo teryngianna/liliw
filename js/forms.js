@@ -125,35 +125,84 @@ const applyForm = document.getElementById("apply-form");
 if (applyForm) {
   const steps = [...applyForm.querySelectorAll(".apply-step")];
   const dots = [...document.querySelectorAll(".stepper li")];
+  const stepper = document.querySelector(".stepper");
   const note = document.getElementById("apply-note");
-  let current = 1;
-  let furthest = 1;
 
-  function goTo(n) {
-    current = n;
-    furthest = Math.max(furthest, n);
-    steps.forEach((s) => (s.hidden = Number(s.dataset.step) !== n));
-    dots.forEach((d, i) => {
-      d.classList.toggle("is-current", i + 1 === n);
-      d.classList.toggle("is-done", i + 1 < furthest || (i + 1 <= furthest && i + 1 !== n));
-    });
-    note.textContent = "";
-    document.querySelector(".stepper-bar").scrollIntoView({ behavior: "smooth", block: "start" });
+  /* Checks a section quietly (no red messages) to see if it's complete */
+  function isComplete(section) {
+    for (const el of section.querySelectorAll("input[required]:not([type=radio]):not([type=checkbox]), textarea[required]")) {
+      if (el.type === "file") { if (!el.files[0]) return false; continue; }
+      const v = el.value.trim();
+      if (!v) return false;
+      if (el.type === "email" && !isEmail(v)) return false;
+      if (el.hasAttribute("data-phone") && !isPhone(v)) return false;
+    }
+    const year = section.querySelector("[data-year]");
+    if (year && year.value.trim()) {
+      const y = Number(year.value), now = new Date().getFullYear();
+      if (!/^\d{4}$/.test(year.value.trim()) || y < 1500 || y > now) return false;
+    }
+    const cat = section.querySelector('[data-required-group="category"]');
+    if (cat) {
+      const picked = cat.querySelector("input[type=radio]:checked");
+      if (!picked) return false;
+      if (picked.value === "Other" && !cat.querySelector(".other-input").value.trim()) return false;
+    }
+    const consent = section.querySelector('[data-required-group="consent"]');
+    if (consent && ![...consent.querySelectorAll("input[type=checkbox]")].every((b) => b.checked)) return false;
+    return true;
   }
 
-  applyForm.querySelectorAll("[data-next]").forEach((btn) =>
-    btn.addEventListener("click", () => {
-      if (validateArea(steps[current - 1])) goTo(current + 1);
-    })
-  );
-  applyForm.querySelectorAll("[data-back]").forEach((btn) =>
-    btn.addEventListener("click", () => goTo(current - 1))
-  );
-  // Clicking a step circle you've already reached jumps back to it
+  /* Progress bar:
+     - the section the person is answering lights up green
+     - every section before it (and any completed section) stays green
+     - the green line grows up to the section they're on */
+  let active = 0;     // section being answered right now (0 = section 1)
+  let furthest = 0;   // furthest section reached so far
+
+  function updateProgress() {
+    let lastLit = 0;
+    steps.forEach((section, i) => {
+      const lit = i <= furthest || isComplete(section);
+      dots[i].classList.toggle("is-done", lit);
+      dots[i].classList.toggle("is-current", i === active);
+      if (lit) lastLit = Math.max(lastLit, i);
+    });
+    // line fills up to the last lit circle that has no gray circle before it
+    let reach = 0;
+    for (let i = 0; i < dots.length; i++) { if (dots[i].classList.contains("is-done")) reach = i; else break; }
+    stepper.style.setProperty("--progress", reach / (dots.length - 1));
+  }
+
+  function setActive(i) {
+    active = i;
+    furthest = Math.max(furthest, i);
+    updateProgress();
+  }
+
+  // Clicking or typing in a section makes it the active one
+  steps.forEach((section, i) => {
+    section.addEventListener("focusin", () => setActive(i));
+    section.addEventListener("click", () => setActive(i));
+  });
+
+  applyForm.addEventListener("input", updateProgress);
+  applyForm.addEventListener("change", updateProgress);
+
+  /* Keep the progress bar visible: it sticks under the menu while scrolling the form */
+  const bar = document.querySelector(".stepper-bar");
+  const sentinel = document.createElement("div");
+  bar.before(sentinel);
+  new IntersectionObserver(([entry]) => {
+    bar.classList.toggle("is-stuck", !entry.isIntersecting && entry.boundingClientRect.top < 0);
+  }, { rootMargin: "-140px 0px 0px 0px" }).observe(sentinel);
+
+  // Clicking a step circle scrolls to that section
   document.querySelectorAll(".stepper [data-goto]").forEach((btn) =>
     btn.addEventListener("click", () => {
-      const n = Number(btn.dataset.goto);
-      if (n < current || (n <= furthest && validateArea(steps[current - 1]))) goTo(n);
+      const i = Number(btn.dataset.goto) - 1;
+      steps[i].scrollIntoView({ behavior: "smooth", block: "start" });
+      setActive(i);
     })
   );
 
@@ -166,11 +215,12 @@ if (applyForm) {
     } else clearError(t);
   });
 
-  // Choosing "Other" puts the cursor in the Other box; typing in it selects "Other"
+  // Typing in the "Other" box selects "Other"; choosing "Other" moves the cursor into the box
   const otherRadio = applyForm.querySelector('input[value="Other"]');
   const otherInput = applyForm.querySelector(".other-input");
   otherRadio.addEventListener("change", () => otherInput.focus());
-  otherInput.addEventListener("input", () => { if (otherInput.value) otherRadio.checked = true; });
+  otherInput.addEventListener("input", () => { if (otherInput.value) { otherRadio.checked = true; updateProgress(); } });
+  otherInput.addEventListener("click", (e) => e.stopPropagation());
 
   // Upload box: show the chosen file name, support drag and drop
   const fileInput = document.getElementById("a-proof");
@@ -183,10 +233,13 @@ if (applyForm) {
   ["dragenter", "dragover"].forEach((ev) => uploadBox.addEventListener(ev, () => uploadBox.classList.add("is-dragover")));
   ["dragleave", "drop"].forEach((ev) => uploadBox.addEventListener(ev, () => uploadBox.classList.remove("is-dragover")));
 
-  // Final submit
+  // Submit: check every section, jump to the first problem
   applyForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    if (!validateArea(steps[3])) return;
+    if (!validateArea(applyForm)) {
+      note.textContent = "Please complete the highlighted fields.";
+      return;
+    }
 
     const submitBtn = document.getElementById("apply-submit");
     submitBtn.disabled = true;
@@ -216,6 +269,8 @@ if (applyForm) {
       submitBtn.textContent = "Submit";
     }
   });
+
+  updateProgress();
 }
 
 /* =========================================================

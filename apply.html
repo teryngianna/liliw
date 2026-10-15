@@ -17,7 +17,7 @@
   <!-- ===================== NAVIGATION ===================== -->
   <header class="site-header">
     <nav class="nav" aria-label="Main">
-      <a class="nav__logo" href="index.html"><img src="assets/images/logo.svg" alt="Liliw home"></a>
+      <a class="nav__logo" href="index.html"><img src="assets/images/logo.svg" alt="Liliw Lokal home"></a>
 
       <button class="nav__burger" aria-label="Open menu" aria-expanded="false">
         <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -25,10 +25,11 @@
 
       <ul class="nav__menu">
         <li><a class="nav__link" href="index.html">Home</a></li>
+        <li><a class="nav__link" href="about.html">About</a></li>
         <li class="nav__dropdown">
           <button class="nav__dropdown-toggle" aria-expanded="false" aria-haspopup="true">
-            MSMEs
-            <svg class="nav__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg>
+            Explore
+            <svg class="nav__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg>
           </button>
           <ul class="nav__dropdown-menu">
             <li><a href="food.html">Food</a></li>
@@ -36,8 +37,17 @@
             <li><a href="handicrafts.html">Handicrafts</a></li>
           </ul>
         </li>
-        <li><a class="nav__link is-active" href="apply.html" aria-current="page">Apply</a></li>
-        <li><a class="nav__link" href="about.html">About</a></li>
+        <li><a class="nav__cta is-active" href="apply.html" aria-current="page">Get Featured</a></li>
+        <li class="nav__search-item">
+          <form class="search" role="search" autocomplete="off">
+            <svg class="search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 20 20"/></svg>
+            <input class="search__input" type="search" placeholder="Search..." aria-label="Search businesses and pages">
+            <button class="search__clear" type="button" aria-label="Clear search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+            </button>
+            <ul class="search__results" role="listbox" hidden></ul>
+          </form>
+        </li>
       </ul>
     </nav>
   </header>
@@ -53,8 +63,8 @@
 
     <!-- ===================== STEPPER ===================== -->
     <div class="stepper-bar">
-      <ol class="stepper" aria-label="Application steps">
-        <li class="is-current"><button type="button" data-goto="1"><span class="stepper__dot">1</span><span class="stepper__label">Business</span></button></li>
+      <ol class="stepper" aria-label="Application progress">
+        <li><button type="button" data-goto="1"><span class="stepper__dot">1</span><span class="stepper__label">Business</span></button></li>
         <li><button type="button" data-goto="2"><span class="stepper__dot">2</span><span class="stepper__label">About</span></button></li>
         <li><button type="button" data-goto="3"><span class="stepper__dot">3</span><span class="stepper__label">Details &amp; Verification</span></button></li>
         <li><button type="button" data-goto="4"><span class="stepper__dot">4</span><span class="stepper__label">Consent</span></button></li>
@@ -85,21 +95,17 @@
             <label class="choice"><input type="radio" name="category" value="Restaurant / Food Business"><span class="choice__dot"></span>Restaurant / Food Business</label>
             <label class="choice"><input type="radio" name="category" value="Hospitality"><span class="choice__dot"></span>Hospitality</label>
             <label class="choice"><input type="radio" name="category" value="Handicrafts"><span class="choice__dot"></span>Handicrafts</label>
-            <label class="choice"><input type="radio" name="category" value="Other"><span class="choice__dot"></span>Other:</label>
-            <input class="other-input" name="categoryOther" type="text" aria-label="Other category">
+            <label class="choice"><input type="radio" name="category" value="Other"><span class="choice__dot"></span>Other:<input class="other-input" name="categoryOther" type="text" aria-label="Other category"></label>
           </fieldset>
           <div class="field">
             <label for="a-year">Year Established</label>
             <input id="a-year" name="yearEstablished" type="text" inputmode="numeric" maxlength="4" placeholder="e.g. 2025" data-year>
           </div>
         </div>
-        <div class="step-actions">
-          <button class="btn-next" type="button" data-next>Next</button>
-        </div>
       </section>
 
       <!-- STEP 2 -->
-      <section class="apply-step" data-step="2" hidden>
+      <section class="apply-step" data-step="2">
         <div class="step-head">
           <span class="step-head__num">2</span>
           <div><h2>About the Business</h2><p>Share your story, what makes your business special, and what sets you apart.</p></div>
@@ -118,14 +124,10 @@
             <textarea id="a-story" class="is-short" name="story" placeholder="Tell us how the business started."></textarea>
           </div>
         </div>
-        <div class="step-actions">
-          <button class="btn-back" type="button" data-back>Back</button>
-          <button class="btn-next" type="button" data-next>Next</button>
-        </div>
       </section>
 
       <!-- STEP 3 -->
-      <section class="apply-step" data-step="3" hidden>
+      <section class="apply-step" data-step="3">
         <div class="step-head">
           <span class="step-head__num">3</span>
           <div><h2>Details and Verification</h2><p>Provide your contact details, online links, and other information to help us verify your business.</p></div>
@@ -174,14 +176,10 @@
             <input id="a-role" name="role" type="text" placeholder="e.g. Business Owner, Manager, Authorized Representative" required>
           </div>
         </div>
-        <div class="step-actions">
-          <button class="btn-back" type="button" data-back>Back</button>
-          <button class="btn-next" type="button" data-next>Next</button>
-        </div>
       </section>
 
       <!-- STEP 4 -->
-      <section class="apply-step" data-step="4" hidden>
+      <section class="apply-step" data-step="4">
         <div class="step-head">
           <span class="step-head__num">4</span>
           <div><h2>Consent</h2><p>Review and agree to the terms regarding your information, privacy, and business feature submission.</p></div>
@@ -193,19 +191,44 @@
           <label class="choice"><input type="checkbox" name="consent3" value="Yes" required><span class="choice__dot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>I have read and understood the information provided and agree to the terms for submitting and potentially featuring my business.</label>
         </fieldset>
         <div class="step-actions">
-          <button class="btn-back" type="button" data-back>Back</button>
           <button class="btn-next" type="submit" id="apply-submit">Submit</button>
         </div>
       </section>
       <p class="form-note" id="apply-note" role="status" aria-live="polite"></p>
     </form>
+    <!-- ===================== GET IN TOUCH (shared on every page) ===================== -->
+    <div class="icon-strip icon-strip--bottom" aria-hidden="true"></div>
+    <section class="contact" id="get-in-touch">
+      <div>
+        <h2 class="contact__title">GET IN<br>TOUCH</h2>
+        <p class="contact__intro">Want to connect?<br>We’d love to hear from you!</p>
+      </div>
+      <form class="contact-form" id="contact-form" novalidate>
+        <input type="hidden" name="formType" value="contact">
+        <div class="line-field">
+          <label for="c-name">Name</label>
+          <input id="c-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="line-field">
+          <label for="c-email">Email</label>
+          <input id="c-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="line-field">
+          <label for="c-message">Message</label>
+          <textarea id="c-message" name="message" rows="1" required></textarea>
+        </div>
+        <button class="btn-red" type="submit">Send</button>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
   </main>
 
   <!-- ===================== FOOTER ===================== -->
   <footer class="site-footer">
     <div class="footer__brand">
-      <img class="footer__logo" src="assets/images/logo.svg" alt="Liliw">
-      <p class="footer__tagline">Love, Made Local</p>
+      <img class="footer__logo" src="assets/images/logo.svg" alt="Liliw Lokal">
+      <p class="footer__follow">Follow us</p>
       <div class="footer__social">
         <!-- Liliw Tourism official pages -->
         <a href="https://www.facebook.com/share/1HSTS8QGon/" target="_blank" rel="noopener" aria-label="Liliw Tourism on Facebook">
@@ -215,7 +238,7 @@
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#fff"/><rect x="6.2" y="6.2" width="11.6" height="11.6" rx="3.4" fill="none" stroke="#0F172B" stroke-width="1.7"/><circle cx="12" cy="12" r="2.8" fill="none" stroke="#0F172B" stroke-width="1.7"/><circle cx="15.4" cy="8.6" r=".9" fill="#0F172B"/></svg>
         </a>
       </div>
-      <p class="footer__copy">© 2026 Liliw: Love, Made Local. All rights reserved.</p>
+      <p class="footer__copy">© 2026 Liliw Love Made Local. All rights reserved.</p>
     </div>
 
     <div class="footer__hotlines">
@@ -252,6 +275,12 @@
     </div>
   </footer>
 
+  <!-- Back to top: appears when you reach the bottom of the page -->
+  <button class="back-to-top" type="button" aria-label="Back to top">
+    <img src="assets/images/back-to-top.svg" alt="">
+  </button>
+
+  <script src="js/search-index.js"></script>
   <script src="js/main.js"></script>
   <script src="js/forms.js"></script>
 </body>

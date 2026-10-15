@@ -389,7 +389,7 @@ button { font: inherit; cursor: pointer; }
 .about-story__text h2 { text-align: left; }
 .about-story__text p {
   margin-top: 38px; max-width: 730px;
-  font-size: 20px; line-height: 24px; text-align: justify; text-indent: 60px;
+  font-size: 20px; line-height: 24px; text-align: justify;
 }
 
 .icon-strip { height: 93px; background: url("../assets/images/about/icon-strip-top.png") left top / 430px 93px repeat-x; }
@@ -434,13 +434,24 @@ button { font: inherit; cursor: pointer; }
 /* =========================================================
    14. APPLY PAGE: STEPPER
    ========================================================= */
-.stepper-bar { background: var(--navy); padding: 44px var(--page-pad) 46px; }
+.stepper-bar {
+  background: var(--navy); padding: 44px var(--page-pad) 46px;
+  position: sticky; top: calc(var(--nav-height) + var(--nav-stripe)); z-index: 50;
+  transition: padding .25s ease;
+}
+/* Compact version while it's stuck under the menu */
+.stepper-bar.is-stuck { padding-top: 12px; padding-bottom: 10px; box-shadow: 0 6px 16px rgba(0,0,0,.25); }
+.stepper-bar.is-stuck .stepper__dot { width: 46px; height: 46px; border-width: 4px; font-size: 15px; }
+.stepper-bar.is-stuck .stepper::before, .stepper-bar.is-stuck .stepper::after { top: 20px; height: 6px; }
+.stepper-bar.is-stuck .stepper__label { margin-top: 6px; font-size: 14px; }
+.stepper__dot, .stepper::before, .stepper::after, .stepper__label { transition: all .25s ease; }
+.stepper li.is-current .stepper__dot { box-shadow: 0 0 0 5px rgba(50,178,97,.35); }
 .stepper {
   position: relative; list-style: none; margin: 0 auto; padding: 0;
   max-width: 1208px; display: flex; justify-content: space-between;
 }
 .stepper::before { /* the connecting line */
-  content: ""; position: absolute; top: 31px; left: 40px; right: 40px; height: 8px; background: #E5E5E5;
+  content: ""; position: absolute; top: 31px; left: 70px; right: 70px; height: 8px; background: #E5E5E5;
 }
 .stepper li { position: relative; display: flex; flex-direction: column; align-items: center; width: 140px; }
 .stepper__dot {
@@ -452,14 +463,21 @@ button { font: inherit; cursor: pointer; }
 }
 .stepper button { background: none; border: 0; padding: 0; display: flex; flex-direction: column; align-items: center; cursor: default; }
 .stepper li.is-done button { cursor: pointer; }
-.stepper li.is-current .stepper__dot { background: #32B261; color: var(--white); }
+.stepper li.is-done .stepper__dot { background: #32B261; color: var(--white); }
+.stepper button { cursor: pointer; }
+.stepper::after { /* green part of the line that grows as sections are completed */
+  content: ""; position: absolute; top: 31px; left: 70px; height: 8px;
+  width: calc((100% - 140px) * var(--progress, 0)); background: #32B261;
+  transition: width .4s ease;
+}
+.stepper li { z-index: 1; }
 .stepper__label { margin-top: 12px; font-family: var(--font-body); font-weight: 500; font-size: 19px; color: #E5E5E5; white-space: nowrap; }
 
 /* =========================================================
    15. APPLY PAGE: FORM
    ========================================================= */
 .apply { padding: 56px var(--page-pad) 80px; max-width: 1440px; margin: 0 auto; }
-.apply-step[hidden] { display: none; }
+.apply-step + .apply-step { margin-top: 110px; }
 .step-head { display: flex; gap: 22px; align-items: flex-start; margin-bottom: 48px; }
 .step-head__num {
   flex: none; width: 80px; height: 80px; border-radius: 50%;
@@ -504,10 +522,12 @@ fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
 .choice input[type="checkbox"]:checked + .choice__dot svg { opacity: 1; }
 .choice input:focus-visible + .choice__dot { outline: 3px solid var(--green); outline-offset: 2px; }
 .other-input {
-  margin-left: 52px; width: 215px; border: 0; border-bottom: 1px solid #333; background: transparent;
+  margin-left: 4px; width: 215px; border: 0; border-bottom: 1px solid #333; background: transparent;
   font-family: var(--font-body); font-size: 16px; padding: 6px 0; outline: none;
 }
-.field input.other-input { height: auto; border: 0; border-bottom: 1px solid #333; border-radius: 0; padding: 6px 0; box-shadow: none; width: 215px; }
+.field input.other-input { height: auto; border: 0; border-bottom: 1px solid #333; border-radius: 0; padding: 2px 0; box-shadow: none; width: 215px; margin-left: 4px; font-size: 18px; }
+.choice input.other-input { position: static; opacity: 1; width: 215px; height: auto; }
+.apply-step { scroll-margin-top: 230px; }
 .other-input:focus, .field input.other-input:focus { border-bottom-color: var(--green); }
 .consent .choice { align-items: flex-start; margin-bottom: 18px; font-weight: 400; color: #000; line-height: 1.3; }
 .consent .choice__dot { margin-top: -3px; }
@@ -589,7 +609,7 @@ fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
   .about-story { grid-template-columns: 1fr; gap: 36px; padding: 48px 0; min-height: 0; }
   .about-story__mosaic { width: 80%; max-width: 360px; }
   .about-story__text { padding: 0 var(--page-pad); }
-  .about-story__text p { font-size: 16px; text-indent: 32px; margin-top: 20px; }
+  .about-story__text p { font-size: 16px; margin-top: 20px; }
   .icon-strip { height: 56px; background-size: 259px 56px; }
   .icon-strip--bottom { height: 52px; background-size: 259px 52px; }
   .facts { padding: 56px var(--page-pad) 64px; }
@@ -600,7 +620,13 @@ fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
   .contact-form .btn-red { width: 100%; }
 
   .stepper-bar { padding: 28px 12px 24px; }
-  .stepper::before { top: 21px; left: 30px; right: 30px; height: 5px; }
+  .stepper-bar.is-stuck { padding: 8px 12px 6px; }
+  .stepper-bar.is-stuck .stepper__dot { width: 34px; height: 34px; border-width: 3px; font-size: 13px; }
+  .stepper-bar.is-stuck .stepper::before, .stepper-bar.is-stuck .stepper::after { top: 15px; height: 4px; }
+  .stepper-bar.is-stuck .stepper__label { display: none; }
+  .apply-step { scroll-margin-top: 150px; }
+  .stepper::before { top: 21px; left: 12.5%; right: 12.5%; height: 5px; }
+  .stepper::after { top: 21px; height: 5px; left: 12.5%; width: calc(75% * var(--progress, 0)); }
   .stepper li { width: 25%; }
   .stepper__dot { width: 48px; height: 48px; border-width: 4px; font-size: 15px; }
   .stepper__label { font-size: 12px; white-space: normal; text-align: center; }
@@ -618,6 +644,8 @@ fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
   .consent .choice { font-size: 15px; }
   .upload { height: 180px; }
   .step-actions { margin-top: 40px; gap: 12px; }
+  .apply-step + .apply-step { margin-top: 64px; }
+  .btn-next { width: 100%; }
   .btn-back, .btn-next { width: 48%; height: 54px; font-size: 18px; }
 
   .submitted-wrap { padding-top: 48px; }
@@ -717,7 +745,7 @@ fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
 .info-list { margin: 8px 0 0 70px; padding: 0; list-style: none; }
 .info-list li::before { content: "• "; }
 .info-list--cols { display: grid; grid-template-columns: repeat(2, minmax(0, max-content)); column-gap: 70px; }
-.info-card__desc { margin-top: 30px; text-align: justify; text-indent: 48px; }
+.info-card__desc { margin-top: 30px; text-align: justify; }
 .info-card__tags { margin-top: 24px; color: #6B6B6B; word-spacing: 2px; }
 .info-card__social {
   position: absolute; top: 40px; right: 52px;
@@ -755,7 +783,7 @@ fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
 .faq__a > div { overflow: hidden; }
 .faq__a p {
   padding: 46px 132px 50px 120px;
-  font-size: 19px; line-height: 24px; color: #6B6B6B; text-align: justify; text-indent: 46px;
+  font-size: 19px; line-height: 24px; color: #6B6B6B; text-align: justify;
 }
 .faq:last-of-type .faq__q { border-bottom-color: #8A8A8A; }
 
@@ -822,14 +850,14 @@ fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
   .info-row svg { width: 24px; height: 24px; }
   .info-list { margin-left: 38px; }
   .info-list--cols { grid-template-columns: 1fr; }
-  .info-card__desc { text-align: left; text-indent: 0; }
+  .info-card__desc { text-align: left; }
   .note { margin: 32px var(--page-pad); padding: 18px; }
   .biz-wide { height: 260px; }
   .faqs { padding: 56px var(--page-pad) 0; }
   .faqs h2 { font-size: 40px; }
   .faq__q { padding: 16px 4px 16px 6px; min-height: 64px; font-size: 16px; }
   .faq__q svg { width: 24px; height: 24px; }
-  .faq__a p { padding: 20px 6px 24px; font-size: 15px; line-height: 21px; text-align: left; text-indent: 0; }
+  .faq__a p { padding: 20px 6px 24px; font-size: 15px; line-height: 21px; text-align: left; }
   .biz-video { padding-top: 56px; }
   .biz-video .flower { display: none; }
   .gallery { padding: 48px 0 64px; }
@@ -861,4 +889,225 @@ fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
   .submitted-card, .submitted-card__icon, .submitted-card h1, .submitted-card p,
   .submitted-card .note-box, .submitted-card__close { animation: none; }
   .submitted-card__check { animation: none; stroke-dashoffset: 0; }
+}
+
+/* =========================================================
+   21. FINAL NAV (Home, About, Explore, Get Featured, Search)
+   ========================================================= */
+.nav__logo img { width: 137px; height: auto; }
+.nav__menu { gap: 43px; }
+.nav__link, .nav__dropdown-toggle { font-family: var(--font-body); font-weight: 600; font-size: 18px; }
+.nav__chevron { width: 20px; height: 20px; }
+.nav__cta {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 42px; padding: 0 22px; border-radius: 999px;
+  border: 3px solid transparent;
+  background: linear-gradient(var(--red), var(--red)) padding-box, linear-gradient(90deg, #FE4949, #B00101) border-box;
+  color: var(--white); text-decoration: none;
+  font-family: var(--font-body); font-weight: 600; font-size: 18px; white-space: nowrap;
+  transition: transform .2s, filter .2s;
+}
+.nav__cta:hover { transform: translateY(-1px); filter: brightness(1.07); }
+.nav__cta.is-active { box-shadow: 0 0 0 2px rgba(16,185,129,.55); }
+
+/* Search bar */
+.search { position: relative; display: flex; align-items: center; width: 180px; height: 40px; border-radius: 999px; background: #3A435B; padding: 0 10px 0 14px; }
+.search__icon { flex: none; width: 18px; height: 18px; color: #A9AFBF; }
+.search__input {
+  flex: 1; min-width: 0; height: 100%; margin-left: 10px; border: 0; background: transparent; outline: none;
+  font-family: var(--font-body); font-size: 15px; color: var(--white);
+}
+.search__input::placeholder { color: #A9AFBF; font-style: italic; }
+.search__input::-webkit-search-cancel-button { display: none; }
+.search:focus-within { box-shadow: 0 0 0 2px var(--green); }
+.search__clear { flex: none; display: grid; place-items: center; width: 26px; height: 26px; border: 0; background: none; color: #A9AFBF; padding: 0; }
+.search__clear svg { width: 18px; height: 18px; }
+.search__clear:hover { color: var(--white); }
+.search__results {
+  position: absolute; top: calc(100% + 10px); right: 0; width: 300px; max-width: 86vw; z-index: 120;
+  list-style: none; margin: 0; padding: 6px 0; background: #F4F4F4; border-radius: 10px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+}
+.search__results a { display: flex; flex-direction: column; gap: 2px; padding: 10px 16px; text-decoration: none; color: var(--navy); }
+.search__results li.is-picked a, .search__results a:hover { background: var(--navy); color: var(--green); }
+.search__title { font-weight: 600; font-size: 15px; }
+.search__type { font-size: 12px; color: #6B6B6B; }
+.search__results li.is-picked .search__type, .search__results a:hover .search__type { color: #A9AFBF; }
+.search__empty { padding: 12px 16px; font-size: 14px; color: #6B6B6B; }
+
+/* Dropdown: directly beneath "Explore" */
+.nav__dropdown-menu { width: 196px; }
+.nav__dropdown-menu a { padding: 16px 0; font-size: 15px; }
+
+/* =========================================================
+   22. FINAL HERO
+   ========================================================= */
+.hero__logo { width: 509px; height: auto; }
+.hero .btn-red { margin-top: 100px; }
+
+/* =========================================================
+   23. CARD IMAGE PAIRS (NH = normal, H = hover). Labels are part of the photos.
+   ========================================================= */
+.card-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .35s ease; }
+.card-img--hover { opacity: 0; }
+.industry-card .card-img { object-position: left center; }
+.industry-card::after, .biz-card::after { display: none; }
+.industry-card:hover .card-img--hover, .industry-card:focus-visible .card-img--hover,
+.biz-card:hover .card-img--hover, .biz-card:focus-visible .card-img--hover { opacity: 1; }
+.industry-card:hover .card-img--normal, .industry-card:focus-visible .card-img--normal,
+.biz-card:hover .card-img--normal, .biz-card:focus-visible .card-img--normal { opacity: 0; }
+
+/* =========================================================
+   24. FINAL DESCRIPTION BOX (business pages)
+   ========================================================= */
+.info-card { padding: 44px 62px 40px; font-size: 18px; line-height: 22px; border-color: #DADADA; background: #EAEAEA; }
+.info-card__title { font-family: var(--font-body); font-weight: 700; font-size: 40px; line-height: 1.1; color: #000; }
+.info-card__desc { margin-top: 18px; text-align: justify; font-size: 17px; line-height: 20px; }
+.info-card__rule { border: 0; border-top: 2px solid #D0D0D0; margin: 18px 10px 22px 0; }
+.info-row { gap: 14px; margin-bottom: 16px; }
+.info-row svg { width: 26px; height: 26px; }
+.info-list { margin: 0 0 6px 40px; }
+.info-card__follow { font-style: italic; color: #747474; font-size: 16px; }
+.info-card__social { position: static; display: flex; flex-wrap: wrap; gap: 15px; margin-top: 14px; }
+.pill {
+  display: inline-flex; align-items: center; gap: 10px; height: 42px; padding: 0 16px 0 10px;
+  border-radius: 999px; border: 2px solid; text-decoration: none; color: #111;
+  font-family: var(--font-body); font-size: 16px; transition: transform .2s, filter .2s;
+}
+.pill:hover { transform: translateY(-2px); filter: brightness(.97); }
+.pill > svg:first-child { width: 28px; height: 28px; flex: none; }
+.pill__arrow { width: 20px; height: 20px; }
+.pill--facebook { background: #CADEF6; border-color: #73A0D7; }
+.pill--instagram { background: #E9CEED; border-color: #C185DC; }
+.pill--tiktok { background: #D6D6D6; border-color: #2B2B2B; }
+.pill--airbnb { background: #FAD0DA; border-color: #F0889F; }
+.pill--booking { background: #B9CCF0; border-color: #34529E; }
+
+/* =========================================================
+   25. FINAL FOOTER
+   ========================================================= */
+.site-footer { padding: 96px max(78px, calc(50% - 720px + 78px)) 72px max(103px, calc(50% - 720px + 103px)); }
+.footer__logo { width: 287px; }
+.footer__follow { margin-top: auto; padding-top: 36px; font-size: 18px; }
+.footer__social { margin-top: 10px; padding-top: 0; }
+.footer__copy { margin-top: 28px; font-size: 18px; }
+.footer__hotlines { padding-top: 58px; }
+.footer__hotlines h2 { font-size: 36px; }
+
+/* =========================================================
+   26. GET IN TOUCH SECTION (now on every page) + BACK TO TOP
+   ========================================================= */
+.contact { scroll-margin-top: 140px; }
+.back-to-top {
+  position: fixed; right: 28px; bottom: 28px; z-index: 90;
+  width: 168px; height: 49px; padding: 0; border: 0; background: none; cursor: pointer;
+  opacity: 0; visibility: hidden; transform: translateY(12px);
+  transition: opacity .3s, transform .3s, visibility .3s;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,.25));
+}
+.back-to-top img { width: 100%; height: 100%; }
+.back-to-top.is-visible { opacity: 1; visibility: visible; transform: none; }
+.back-to-top:hover { transform: translateY(-2px); }
+.back-to-top:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; border-radius: 14px; }
+
+/* =========================================================
+   27. FINAL PIECES ON TABLETS AND PHONES
+   ========================================================= */
+@media (max-width: 1200px) {
+  .nav__menu { gap: 26px; }
+  .search { width: 150px; }
+  .info-card { padding: 34px 34px 32px; }
+  .site-footer { padding-left: var(--page-pad); padding-right: var(--page-pad); }
+}
+@media (max-width: 900px) {
+  .nav__logo img { width: 100px; }
+  .nav__menu { gap: 0; height: auto; }
+  .nav__cta { margin: 10px var(--page-pad); width: calc(100% - 2 * var(--page-pad)); height: 46px; }
+  .nav__search-item { padding: 8px var(--page-pad) 4px; }
+  .search { width: 100%; height: 44px; }
+  .search__results { left: 0; right: 0; width: auto; max-width: none; }
+  .hero__logo { width: min(78vw, 360px); }
+  .hero .btn-red { margin-top: 12vh; }
+  .industry-card .card-img { object-position: center bottom; }
+  .biz-card .card-img--hover { display: none; }
+  .biz-card:hover .card-img--normal { opacity: 1; }
+  .industry-card .card-img--hover { display: none; }
+  .industry-card:hover .card-img--normal { opacity: 1; }
+  .info-card { padding: 26px 20px; }
+  .info-card__title { font-size: 28px; }
+  .info-card__desc { font-size: 16px; text-align: left; }
+  .info-list { margin-left: 40px; }
+  .pill { height: 40px; font-size: 15px; }
+  .site-footer { padding: 48px var(--page-pad) 96px; }
+  .footer__logo { width: 200px; }
+  .footer__follow { padding-top: 24px; font-size: 16px; }
+  .footer__copy { font-size: 14px; }
+  .footer__hotlines { padding-top: 0; }
+  .back-to-top { right: 14px; bottom: 14px; width: 140px; height: 41px; }
+}
+.hero__logo { filter: drop-shadow(0 2px 6px rgba(0,0,0,.45)); }
+.info-card__social .pill { display: inline-flex; align-items: center; justify-content: flex-start; color: #111; }
+.info-card__social .pill .pill__arrow { width: 20px; height: 20px; }
+
+/* =========================================================
+   28. PHOTO CARDS (Home industries + business cards)
+   One clean photo + a label bar built in code, so every card has the
+   same frame, the same shadow, and white/green labels of equal size.
+   ========================================================= */
+.photo-card {
+  position: relative; display: flex; flex-direction: column;
+  background: #fff; border-radius: 14px; overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, .22);
+  text-decoration: none; color: var(--navy);
+  transition: box-shadow .35s ease, transform .35s ease, flex-grow .5s ease;
+}
+.photo-card__photo { position: relative; flex: 1; min-height: 0; overflow: hidden; }
+.photo-card__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.photo-card__photo::after { /* soft dark tint on hover */
+  content: ""; position: absolute; inset: 0; background: rgba(15, 23, 43, .45);
+  opacity: 0; transition: opacity .35s ease;
+}
+.photo-card__bar {
+  flex: none; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  height: 78px; padding: 0 26px 0 30px;
+  background: #fff; color: var(--navy);
+  font-family: var(--font-body); font-size: 21px; line-height: 1.15;
+  transition: background-color .35s ease, color .35s ease;
+}
+.photo-card__bar svg { flex: none; width: 24px; height: 24px; }
+.photo-card:hover .photo-card__photo::after, .photo-card:focus-visible .photo-card__photo::after { opacity: 1; }
+.photo-card:hover .photo-card__bar, .photo-card:focus-visible .photo-card__bar { background: #56C99E; color: #fff; }
+.photo-card:focus-visible { outline: 3px solid var(--green); outline-offset: 4px; }
+
+/* Home industry cards keep the "grow wider" hover, just smoother; bar matches the design height */
+.industry-card.photo-card .photo-card__bar { height: 84px; padding: 0 30px 0 42px; font-size: 24px; }
+.industry-card.photo-card:hover .photo-card__bar, .industry-card.photo-card:focus-visible .photo-card__bar { background: #41D27B; }
+.industry-card.photo-card { transition: flex-grow .55s cubic-bezier(.25,.8,.25,1), box-shadow .35s ease; }
+
+/* Business cards: no zooming, only a small lift (calmer) */
+.biz-card.photo-card { aspect-ratio: auto; height: 365px; }
+.biz-card.photo-card:hover, .biz-card.photo-card:focus-visible { transform: translateY(-4px); box-shadow: 0 8px 18px rgba(0, 0, 0, .25); }
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-card, .photo-card__photo::after, .photo-card__bar { transition: none; }
+}
+@media (max-width: 1200px) {
+  .biz-card.photo-card { height: auto; aspect-ratio: 1; }
+}
+@media (max-width: 900px) {
+  .photo-card__bar, .industry-card.photo-card .photo-card__bar { height: 62px; padding: 0 20px; font-size: 18px; }
+  .photo-card:hover .photo-card__photo::after { opacity: 0; }
+  .photo-card:hover .photo-card__bar { background: #fff; color: var(--navy); }
+  .biz-card.photo-card:hover { transform: none; }
+  .industry-card.photo-card { height: 300px; }
+  .biz-card.photo-card { height: auto; aspect-ratio: 1; }
+}
+
+/* Dropdown: starts right under the navy bar, covering the green line (like the reference) */
+.nav__dropdown-menu { top: 100%; width: 171px; border-radius: 0 0 12px 12px; }
+.nav__dropdown-menu::before { display: none; }
+.nav__dropdown-menu a { padding: 0; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 15px; }
+@media (max-width: 900px) {
+  .nav__dropdown-menu { width: 100%; border-radius: 0; }
+  .nav__dropdown-menu a { justify-content: flex-start; height: 48px; padding: 0 calc(var(--page-pad) + 16px); font-size: 16px; }
 }

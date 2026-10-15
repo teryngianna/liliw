@@ -17,7 +17,7 @@
   <!-- ===================== NAVIGATION ===================== -->
   <header class="site-header">
     <nav class="nav" aria-label="Main">
-      <a class="nav__logo" href="index.html"><img src="assets/images/logo.svg" alt="Liliw home"></a>
+      <a class="nav__logo" href="index.html"><img src="assets/images/logo.svg" alt="Liliw Lokal home"></a>
 
       <button class="nav__burger" aria-label="Open menu" aria-expanded="false">
         <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -25,10 +25,11 @@
 
       <ul class="nav__menu">
         <li><a class="nav__link" href="index.html">Home</a></li>
+        <li><a class="nav__link is-active" href="about.html" aria-current="page">About</a></li>
         <li class="nav__dropdown">
           <button class="nav__dropdown-toggle" aria-expanded="false" aria-haspopup="true">
-            MSMEs
-            <svg class="nav__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg>
+            Explore
+            <svg class="nav__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg>
           </button>
           <ul class="nav__dropdown-menu">
             <li><a href="food.html">Food</a></li>
@@ -36,8 +37,17 @@
             <li><a href="handicrafts.html">Handicrafts</a></li>
           </ul>
         </li>
-        <li><a class="nav__link" href="apply.html">Apply</a></li>
-        <li><a class="nav__link is-active" href="about.html" aria-current="page">About</a></li>
+        <li><a class="nav__cta" href="apply.html">Get Featured</a></li>
+        <li class="nav__search-item">
+          <form class="search" role="search" autocomplete="off">
+            <svg class="search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 20 20"/></svg>
+            <input class="search__input" type="search" placeholder="Search..." aria-label="Search businesses and pages">
+            <button class="search__clear" type="button" aria-label="Clear search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+            </button>
+            <ul class="search__results" role="listbox" hidden></ul>
+          </form>
+        </li>
       </ul>
     </nav>
   </header>
@@ -76,11 +86,9 @@
         <div><dt>Currency</dt><dd>Philippine Peso (₱)</dd></div>
       </dl>
     </section>
-
+    <!-- ===================== GET IN TOUCH (shared on every page) ===================== -->
     <div class="icon-strip icon-strip--bottom" aria-hidden="true"></div>
-
-    <!-- ===================== GET IN TOUCH ===================== -->
-    <section class="contact">
+    <section class="contact" id="get-in-touch">
       <div>
         <h2 class="contact__title">GET IN<br>TOUCH</h2>
         <p class="contact__intro">Want to connect?<br>We’d love to hear from you!</p>
@@ -103,13 +111,14 @@
         <p class="form-status" role="status" aria-live="polite"></p>
       </form>
     </section>
+
   </main>
 
   <!-- ===================== FOOTER ===================== -->
   <footer class="site-footer">
     <div class="footer__brand">
-      <img class="footer__logo" src="assets/images/logo.svg" alt="Liliw">
-      <p class="footer__tagline">Love, Made Local</p>
+      <img class="footer__logo" src="assets/images/logo.svg" alt="Liliw Lokal">
+      <p class="footer__follow">Follow us</p>
       <div class="footer__social">
         <!-- Liliw Tourism official pages -->
         <a href="https://www.facebook.com/share/1HSTS8QGon/" target="_blank" rel="noopener" aria-label="Liliw Tourism on Facebook">
@@ -119,7 +128,7 @@
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#fff"/><rect x="6.2" y="6.2" width="11.6" height="11.6" rx="3.4" fill="none" stroke="#0F172B" stroke-width="1.7"/><circle cx="12" cy="12" r="2.8" fill="none" stroke="#0F172B" stroke-width="1.7"/><circle cx="15.4" cy="8.6" r=".9" fill="#0F172B"/></svg>
         </a>
       </div>
-      <p class="footer__copy">© 2026 Liliw: Love, Made Local. All rights reserved.</p>
+      <p class="footer__copy">© 2026 Liliw Love Made Local. All rights reserved.</p>
     </div>
 
     <div class="footer__hotlines">
@@ -156,6 +165,12 @@
     </div>
   </footer>
 
+  <!-- Back to top: appears when you reach the bottom of the page -->
+  <button class="back-to-top" type="button" aria-label="Back to top">
+    <img src="assets/images/back-to-top.svg" alt="">
+  </button>
+
+  <script src="js/search-index.js"></script>
   <script src="js/main.js"></script>
   <script src="js/forms.js"></script>
 </body>
