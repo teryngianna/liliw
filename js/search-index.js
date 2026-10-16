@@ -82,7 +82,7 @@ window.SEARCH_INDEX = [
   "title": "About",
   "type": "Page",
   "url": "about.html",
-  "text": "about us love made local facts in liliw location climate established barangays get in touch contact"
+  "text": "about us discover the heart of local liliw lokal empower promote msmes facts in liliw location climate established barangays get in touch contact"
  },
  {
   "title": "Get Featured",

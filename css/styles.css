@@ -1111,3 +1111,7 @@ fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
   .nav__dropdown-menu { width: 100%; border-radius: 0; }
   .nav__dropdown-menu a { justify-content: flex-start; height: 48px; padding: 0 calc(var(--page-pad) + 16px); font-size: 16px; }
 }
+/* About story: new text spacing (matches the final About text design) */
+.about-story__text p { line-height: 28px; margin-top: 40px; }
+.about-story__text .section-title { line-height: .94; }
+@media (max-width: 900px) { .about-story__text p { line-height: 24px; margin-top: 20px; } }
